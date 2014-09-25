@@ -1,0 +1,56 @@
+<joblist>
+  <job>
+    <id>620d7bfc-57ef-4f1f-ba23-9e3c6b674b3f</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>sed -i '/SELINUX=enforcing""/c\SELINUX="${option.SELinux}"' /etc/sysconfig/selinux</exec>
+        <description>Change SELinux to disabled</description>
+      </command>
+      <command>
+        <exec>echo "${option.hostsfile}" &gt;&gt; /etc/hosts</exec>
+        <description>Add hosts to /etc/hosts</description>
+      </command>
+      <command>
+        <exec>yum -y install ntp</exec>
+        <description>Install ntpd</description>
+      </command>
+      <command>
+        <exec>yum -y install piranha*</exec>
+        <description>Install piranha</description>
+      </command>
+      <command>
+        <exec>service piranha-gui start</exec>
+        <description>Start piranha-gui</description>
+      </command>
+      <command>
+        <exec>echo "piranha:ULDrgpmCEe5PA" &gt;&gt; /etc/sysconfig/ha/conf/piranha.passwd</exec>
+        <description>Set Piranha default password</description>
+      </command>
+    </sequence>
+    <description></description>
+    <name>Install and Configure LVS</name>
+    <context>
+      <project>dihiav</project>
+      <options>
+        <option name='SELinux' value='disabled' values='disabled,enforcing,permissive' enforcedvalues='true' required='true'>
+          <description>What would you like SELinux to be on?</description>
+        </option>
+        <option name='hostsfile' multivalued='true' delimiter='/\'>
+          <description>Add servers hosts [Hostname IP]</description>
+        </option>
+      </options>
+    </context>
+    <dispatch>
+      <threadcount>2</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>620d7bfc-57ef-4f1f-ba23-9e3c6b674b3f</uuid>
+    <nodefilters>
+      <filter>Software: lvs</filter>
+    </nodefilters>
+    <group>Initial Configuration/Load Balancers</group>
+  </job>
+</joblist>

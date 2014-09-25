@@ -1,0 +1,87 @@
+<joblist>
+  <job>
+    <id>776baccf-0c6d-4e3e-a676-ce3cbf062da5</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>sed -i '/SELINUX=enforcing/c\SELINUX=${option.SELinux}' /etc/sysconfig/selinux</exec>
+        <description>Change SELinux to disabled</description>
+      </command>
+      <command>
+        <exec>echo "${option.hostsfile}" &gt;&gt; /etc/hosts</exec>
+        <description>Add hosts to /etc/hosts</description>
+      </command>
+      <command>
+        <description>Setup iptables</description>
+        <scriptargs />
+        <script><![CDATA[iptables -A INPUT -m tcp -p tcp --dport 3636 -j ACCEPT
+iptables -A INPUT -m tcp -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -m tcp -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -m tcp -p tcp --dport 539 -j ACCEPT
+iptables -A INPUT -m udp -p udp --dport 161 -j ACCEPT]]></script>
+      </command>
+      <command>
+        <exec>yum install ntp piranha ipvsadm mysql -y</exec>
+        <description>Install ntpd, piranha, ipvsadm and mysql</description>
+      </command>
+      <command>
+        <exec>service piranha-gui start</exec>
+        <description>Start piranha-gui</description>
+      </command>
+      <command>
+        <exec>echo "piranha:ULDrgpmCEe5PA" &gt;&gt; /etc/sysconfig/ha/conf/piranha.passwd</exec>
+        <description>Set Piranha default password</description>
+      </command>
+      <command>
+        <exec>chkconfig piranha-gui on</exec>
+        <description>chkconfig piranha-gui</description>
+      </command>
+      <command>
+        <exec>chkconfig pulse on</exec>
+        <description>chkconfig pulse</description>
+      </command>
+      <command>
+        <exec>sed -i '/net.ipv4.ip_forward = 1/c\net.ipv4.ip_forward = ${option.IPForward}' /etc/sysctl.conf</exec>
+        <description>Turn on IP forwarding</description>
+      </command>
+      <command>
+        <exec>sysctl -p</exec>
+        <description>Activate sysctl</description>
+      </command>
+      <command>
+        <exec>lsmod | grep ip_tables</exec>
+        <description>Check whether iptables is loaded properly as the kernel module</description>
+      </command>
+    </sequence>
+    <description></description>
+    <name>[WIP] Install and Configure LVS</name>
+    <context>
+      <project>dihiav</project>
+      <options>
+        <option name='IPForward' value='1' values='0,1' enforcedvalues='true' required='true'>
+          <description>Turn IP Forwarding on[1] or off[0]</description>
+        </option>
+        <option name='SELinux' value='disabled' values='disabled,enforcing,permissive' enforcedvalues='true' required='true'>
+          <description>What would you like SELinux to be on?</description>
+        </option>
+        <option name='hostsfile' multivalued='true' delimiter='/\'>
+          <description>Add servers hosts [Hostname IP]</description>
+        </option>
+        <option name='virtualpublicip' required='true'>
+          <description>What is the virtual public IP that DNS is sending traffic to?</description>
+        </option>
+      </options>
+    </context>
+    <dispatch>
+      <threadcount>2</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>776baccf-0c6d-4e3e-a676-ce3cbf062da5</uuid>
+    <nodefilters>
+      <filter>Software: lvs</filter>
+    </nodefilters>
+    <group>Initial Configuration/Load Balancers</group>
+  </job>
+</joblist>

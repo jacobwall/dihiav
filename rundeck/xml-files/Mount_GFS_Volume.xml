@@ -1,0 +1,53 @@
+<joblist>
+  <job>
+    <id>29b39252-285d-45da-9338-bb2d34d99c52</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>${option.aptgetyum} -y install glusterfs-client</exec>
+        <description>Install gfs client</description>
+      </command>
+      <command>
+        <exec>mkdir ${option.mountlocation}</exec>
+        <errorhandler keepgoingOnSuccess='true'>
+          <exec>echo directory already created</exec>
+        </errorhandler>
+        <description>make directory</description>
+      </command>
+      <command>
+        <exec>sudo mount -t glusterfs ${option.gfsIP}:${option.volumename} ${option.mountlocation}</exec>
+        <description>mount gfs volume</description>
+      </command>
+    </sequence>
+    <description>Mount GFS Volume</description>
+    <name>Mount GFS Volume</name>
+    <context>
+      <project>dihiav</project>
+      <options>
+        <option name='aptgetyum' value='yum' values='apt-get,yum' enforcedvalues='true' required='true'>
+          <description>apt-get or yum</description>
+        </option>
+        <option name='gfsIP' required='true'>
+          <description>gfsIP</description>
+        </option>
+        <option name='mountlocation' value='/home' values='/home,/srv,/storage-pool' required='true'>
+          <description>Mount Location</description>
+        </option>
+        <option name='volumename' required='true'>
+          <description>Volume Name</description>
+        </option>
+      </options>
+    </context>
+    <dispatch>
+      <threadcount>2</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>29b39252-285d-45da-9338-bb2d34d99c52</uuid>
+    <nodefilters>
+      <filter>serverpilot(\d*).dihiav.com</filter>
+    </nodefilters>
+    <group>Initial Configuration/GlusterFS</group>
+  </job>
+</joblist>

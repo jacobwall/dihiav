@@ -30,7 +30,7 @@
     </dispatch>
     <uuid>665c4c32-cfc0-4603-8727-3bb78a172252</uuid>
     <nodefilters>
-      <filter>Rundeck-Tags: interworx,notconfigured</filter>
+      <filter>name: interworx.*</filter>
     </nodefilters>
     <group>Initial Configuration/Web Servers</group>
   </job>

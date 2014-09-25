@@ -7,13 +7,34 @@
         <exec>yum -y localinstall http://plain.resources.ovirt.org/pub/yum-repo/ovirt-release34.rpm</exec>
         <description>Install oVirt Repo</description>
       </command>
+      <command>
+        <exec>chkconfig iptables off</exec>
+        <description>Stop iptables at boot</description>
+      </command>
+      <command>
+        <exec>service iptables stop</exec>
+        <description>Stop iptables</description>
+      </command>
+      <command>
+        <exec>yum -y install tar</exec>
+        <description>Install tar, if not already installed</description>
+      </command>
     </sequence>
     <description>Install GFS node</description>
     <name>Install GFS Node</name>
     <context>
       <project>dihiav</project>
     </context>
+    <dispatch>
+      <threadcount>4</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
     <uuid>f1153241-1d65-49c1-ad10-4e254b98377e</uuid>
+    <nodefilters>
+      <filter>name: gfs.*</filter>
+    </nodefilters>
     <group>Initial Configuration/GlusterFS</group>
   </job>
 </joblist>
