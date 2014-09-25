@@ -21,7 +21,7 @@
     </dispatch>
     <uuid>dde23440-5dce-4849-90b5-124a6a1adfdc</uuid>
     <nodefilters>
-      <filter>name: cpanel01.dihiav.com</filter>
+      <filter>name: cpanel.*</filter>
     </nodefilters>
     <group>Initial Configuration/Web Servers</group>
   </job>
