@@ -1,0 +1,43 @@
+<joblist>
+  <job>
+    <id>3670aee5-434c-4888-a44c-8e217df2d1fb</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>gluster volume create ${option.volumename} ${option.replica} transport tcp ${option.servers} force</exec>
+        <description>Create volume</description>
+      </command>
+      <command>
+        <exec>gluster volume start ${option.volumename}</exec>
+        <description>Start volume</description>
+      </command>
+    </sequence>
+    <description>Create Volume</description>
+    <name>Create Volume</name>
+    <context>
+      <project>dihiav</project>
+      <options>
+        <option name='replica' required='true'>
+          <description>Distributed = Nothing, Replicate =replica, striped = stripe,  distributedstripe=stripe #[halfoftotalbricks], distributedreplicated=sameasbefore except replica</description>
+        </option>
+        <option name='servers' value='server1:/exp1' required='true'>
+          <description>server1:/exp1</description>
+        </option>
+        <option name='volumename' required='true'>
+          <description>Volume Name</description>
+        </option>
+      </options>
+    </context>
+    <dispatch>
+      <threadcount>2</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>3670aee5-434c-4888-a44c-8e217df2d1fb</uuid>
+    <nodefilters>
+      <filter>gfs(\d+).*</filter>
+    </nodefilters>
+    <group>Daily Tasks</group>
+  </job>
+</joblist>
