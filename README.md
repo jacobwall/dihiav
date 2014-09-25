@@ -27,6 +27,7 @@ dihiav uses a number of open source projects to work properly:
 
 ##### Load Balancing
 * [LVS] - load balancing software for Linux kernel–based operating systems
+* [Piranha] - IPVS kernel code, cluster monitoring tool and web-based cluster configuration tool
 
 Installation
 --------------
@@ -45,3 +46,4 @@ chmod +x dihiav/setup.sh
 [MariaDB]:https://mariadb.com/
 [oVirt]:http://ovirt.org/
 [LVS]:www.linuxvirtualserver.org/
+[Piranha]:http://www.linuxvirtualserver.org/docs/ha/piranha.html
