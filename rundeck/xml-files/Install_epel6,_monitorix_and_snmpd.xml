@@ -37,7 +37,7 @@
     </dispatch>
     <uuid>f7d5a3b7-215b-4379-b289-acad40fa81da</uuid>
     <nodefilters>
-      <filter>name: .*</filter>
+      <filter>Rundeck-Tags: notconfigured</filter>
     </nodefilters>
     <group>Initial Configuration</group>
   </job>
