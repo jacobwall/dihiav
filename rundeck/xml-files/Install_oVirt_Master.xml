@@ -21,7 +21,16 @@
     <context>
       <project>dihiav</project>
     </context>
+    <dispatch>
+      <threadcount>1</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
     <uuid>a6d29054-f667-40c3-ae4f-cc7813cc2437</uuid>
+    <nodefilters>
+      <filter>name: ovirt.*</filter>
+    </nodefilters>
     <group>Initial Configuration/GlusterFS</group>
   </job>
 </joblist>
