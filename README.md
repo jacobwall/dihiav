@@ -1,7 +1,7 @@
 dihiav
 ======
 
-dihiav is an all-in-one distributed high-availability webserver, storage and database platform. dihiav, requires * User/Repository: rundeck/rundeck to deploy servers.
+dihiav is an all-in-one distributed high-availability webserver, storage and database platform. dihiav, requires [Rundeck](https://github.com/rundeck/rundeck) to deploy servers.
 
 Version
 ----
