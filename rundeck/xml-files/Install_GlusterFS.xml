@@ -1,0 +1,39 @@
+<joblist>
+  <job>
+    <id>2c681e8f-79b3-4f54-96bc-cccf5daa21df</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>wget -P /etc/yum.repos.d http://download.gluster.org/pub/gluster/glusterfs/LATEST/CentOS/glusterfs-epel.repo</exec>
+        <description>Install GFS repo</description>
+      </command>
+      <command>
+        <exec>yum -y install glusterfs glusterfs-fuse glusterfs-server</exec>
+        <description>install glusterfs glusterfs-fuse glusterfs-server</description>
+      </command>
+      <command>
+        <exec>/etc/init.d/glusterd start</exec>
+        <description>start glusterd</description>
+      </command>
+      <command>
+        <exec>chkconfig glusterfsd on</exec>
+        <description>start on boot</description>
+      </command>
+    </sequence>
+    <description>install glusterfs-server</description>
+    <name>Install GlusterFS</name>
+    <context>
+      <project>dihiav</project>
+    </context>
+    <dispatch>
+      <threadcount>4</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>2c681e8f-79b3-4f54-96bc-cccf5daa21df</uuid>
+    <nodefilters>
+      <filter>gfs(\d+).*</filter>
+    </nodefilters>
+  </job>
+</joblist>
