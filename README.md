@@ -1,7 +1,7 @@
 dihiav
 ======
 
-dihiav is an all-in-one distributed high-availability webserver, storage and database platform.
+dihiav is an all-in-one distributed high-availability webserver, storage and database platform. dihiav, requires * User/Repository: rundeck/rundeck to deploy servers.
 
 Version
 ----
@@ -15,7 +15,7 @@ dihiav uses a number of open source projects to work properly:
 
 ##### Deployment
 
-* [Spacewalk] - open source Linux systems management solution
+* [Rundeck] - open source job automation platform
 
 ##### File Storage
 
@@ -40,7 +40,7 @@ chmod +x dihiav/setup.sh
 
 **Enjoy! Email me@jacobwall.com if you have any issues!**
 
-[Spacewalk]:http://spacewalk.redhat.com/
+[Rundeck]:http://rundeck.org/
 [GlusterFS]:http://www.gluster.org/
 [MariaDB]:https://mariadb.com/
 [oVirt]:http://ovirt.org/
