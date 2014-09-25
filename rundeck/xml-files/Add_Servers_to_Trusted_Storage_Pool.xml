@@ -1,0 +1,32 @@
+<joblist>
+  <job>
+    <id>03be23d7-a0e3-4c87-819a-8d7b6c179283</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>gluster peer probe ${option.server}</exec>
+      </command>
+    </sequence>
+    <description>Adding Servers to Trusted Storage Pool</description>
+    <name>Add Servers to Trusted Storage Pool</name>
+    <context>
+      <project>dihiav</project>
+      <options>
+        <option name='server' required='true'>
+          <description>What new server to probe?</description>
+        </option>
+      </options>
+    </context>
+    <dispatch>
+      <threadcount>1</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>03be23d7-a0e3-4c87-819a-8d7b6c179283</uuid>
+    <nodefilters>
+      <filter>gfs1.*</filter>
+    </nodefilters>
+    <group>Daily Tasks</group>
+  </job>
+</joblist>
