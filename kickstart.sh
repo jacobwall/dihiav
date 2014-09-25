@@ -4,4 +4,3 @@ gitdihiav(){
 		yum -y install git
 		git clone git@github.com:jacobwall/dihiav.git
 }
-gitdiav

@@ -1,0 +1,27 @@
+<joblist>
+  <job>
+    <id>a6d29054-f667-40c3-ae4f-cc7813cc2437</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>yum -y update</exec>
+        <description>Verify up to date</description>
+      </command>
+      <command>
+        <exec>yum install http://plain.resources.ovirt.org/pub/yum-repo/ovirt-release34.rpm</exec>
+        <description>Install oVirt rpm</description>
+      </command>
+      <command>
+        <exec>yum -y install ovirt-engine</exec>
+        <description>Install ovirt-engine</description>
+      </command>
+    </sequence>
+    <description></description>
+    <name>Install oVirt Master</name>
+    <context>
+      <project>dihiav</project>
+    </context>
+    <uuid>a6d29054-f667-40c3-ae4f-cc7813cc2437</uuid>
+    <group>Initial Configuration/GlusterFS</group>
+  </job>
+</joblist>

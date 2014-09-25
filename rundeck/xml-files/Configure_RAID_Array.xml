@@ -1,0 +1,54 @@
+<joblist>
+  <job>
+    <id>2dd5de9c-d718-4fb2-8c95-18aba3185fb1</id>
+    <loglevel>DEBUG</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>mdadm --manage ${option.drivename} --stop</exec>
+        <description>Stop old array, if needed</description>
+      </command>
+      <command>
+        <scriptargs />
+        <script><![CDATA[mdadm --create --verbose -f --assume-clean --run @option.drivename@ --level=@option.raidlevel@ --raid-devices=`lsblk | grep -v "/" | grep -v NAME | awk {'print "/dev/"$1'} | sed ':a;N;$!ba;s/\n/ /g' | awk -F "fhdakfd" {'print $1'} | wc -w` `lsblk | grep -v "/" | grep -v NAME | awk {'print "/dev/"$1'} | sed ':a;N;$!ba;s/\n/ /g' | awk -F "fhdakfd" {'print $1'}`]]></script>
+      </command>
+      <command>
+        <exec>mkfs -t ${option.filesystem} ${option.drivename}</exec>
+        <description>Format Ephermal Drives as filesystem chosen</description>
+      </command>
+      <command>
+        <exec>mount -t ${option.filesystem} ${option.drivename} ${option.mountlocation}</exec>
+        <description>Mount HDDs as single partition</description>
+      </command>
+    </sequence>
+    <description>Configure RAID array</description>
+    <name>Configure RAID Array</name>
+    <context>
+      <project>dihiav</project>
+      <options>
+        <option name='drivename' value='/dev/md0' values='/dev/md0' required='true'>
+          <description>drivename</description>
+        </option>
+        <option name='filesystem' value='ext4' values='ext4,xfs' enforcedvalues='true' required='true'>
+          <description>Filesystem</description>
+        </option>
+        <option name='mountlocation' value='/home' values='/home,/storage-pool' enforcedvalues='true' required='true'>
+          <description>Where would you like the drives to be mounted?</description>
+        </option>
+        <option name='raidlevel' value='stripe' values='mirror,stripe'>
+          <description>What RAID level would you like?</description>
+        </option>
+      </options>
+    </context>
+    <dispatch>
+      <threadcount>1</threadcount>
+      <keepgoing>true</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>2dd5de9c-d718-4fb2-8c95-18aba3185fb1</uuid>
+    <nodefilters>
+      <filter>tags: GlusterFS Rundeck-Tags: notconfigured</filter>
+    </nodefilters>
+    <group>Initial Configuration</group>
+  </job>
+</joblist>

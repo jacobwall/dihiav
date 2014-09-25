@@ -1,0 +1,28 @@
+<joblist>
+  <job>
+    <id>dde23440-5dce-4849-90b5-124a6a1adfdc</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>wget -N http://httpupdate.cpanel.net/latest &amp;&amp; sh latest</exec>
+        <description>Install cPanel</description>
+      </command>
+    </sequence>
+    <description></description>
+    <name>Install cPanel</name>
+    <context>
+      <project>dihiav</project>
+    </context>
+    <dispatch>
+      <threadcount>1</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>dde23440-5dce-4849-90b5-124a6a1adfdc</uuid>
+    <nodefilters>
+      <filter>name: cpanel01.dihiav.com</filter>
+    </nodefilters>
+    <group>Initial Configuration/Web Servers</group>
+  </job>
+</joblist>

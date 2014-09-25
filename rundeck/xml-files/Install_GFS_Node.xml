@@ -1,0 +1,19 @@
+<joblist>
+  <job>
+    <id>f1153241-1d65-49c1-ad10-4e254b98377e</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>yum -y localinstall http://plain.resources.ovirt.org/pub/yum-repo/ovirt-release34.rpm</exec>
+        <description>Install oVirt Repo</description>
+      </command>
+    </sequence>
+    <description>Install GFS node</description>
+    <name>Install GFS Node</name>
+    <context>
+      <project>dihiav</project>
+    </context>
+    <uuid>f1153241-1d65-49c1-ad10-4e254b98377e</uuid>
+    <group>Initial Configuration/GlusterFS</group>
+  </job>
+</joblist>

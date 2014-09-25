@@ -1,0 +1,44 @@
+<joblist>
+  <job>
+    <id>f7d5a3b7-215b-4379-b289-acad40fa81da</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='true' strategy='node-first'>
+      <command>
+        <exec>yum -y install epel-release mdadm xfsprogs-devel perl dialog git</exec>
+        <description>Verify epel6 is installed</description>
+      </command>
+      <command>
+        <exec>yum -y install monitorix</exec>
+        <description>Install Monitorix via yum</description>
+      </command>
+      <command>
+        <exec>service monitorix start</exec>
+        <description>Start monitorix</description>
+      </command>
+      <command>
+        <exec>yum -y install net-snmp net-snmp-utils</exec>
+        <description>Install snmp</description>
+      </command>
+      <command>
+        <exec>service iptables stop</exec>
+        <description>Stop iptables</description>
+      </command>
+    </sequence>
+    <description>Install: epel6, monitorix, snmpd</description>
+    <name>Install epel6, monitorix and snmpd</name>
+    <context>
+      <project>dihiav</project>
+    </context>
+    <dispatch>
+      <threadcount>5</threadcount>
+      <keepgoing>false</keepgoing>
+      <excludePrecedence>true</excludePrecedence>
+      <rankOrder>ascending</rankOrder>
+    </dispatch>
+    <uuid>f7d5a3b7-215b-4379-b289-acad40fa81da</uuid>
+    <nodefilters>
+      <filter>Rundeck-Tags: notconfigured</filter>
+    </nodefilters>
+    <group>Initial Configuration</group>
+  </job>
+</joblist>
